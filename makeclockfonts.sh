@@ -17,7 +17,7 @@ inpath=~/Downloads/freefont-20120503/
 outpath=ClockFonts/
 fonts=(FreeMono FreeSans FreeSerif)
 styles=("" Bold Italic BoldItalic Oblique BoldOblique)
-sizes=(8 9 10 11 12 14 16 18 24 30 36 42 48 54 60 72)
+sizes=(8 9 10 11 12 14 16 18 24 30 36 42 48 54 60 66 72)
 
 for f in ${fonts[*]}
 do
