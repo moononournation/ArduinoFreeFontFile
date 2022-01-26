@@ -139,6 +139,21 @@ int main(int argc, char *argv[]) {
   // << 6 because '26dot6' fixed-point format
   FT_Set_Char_Size(face, size << 6, 0, DPI, 0);
 
+  printf("#ifndef %s_H\n", fontName);
+  printf("#define %s_H\n\n", fontName);
+  printf("#ifdef __AVR__\n");
+  printf("#include <avr/io.h>\n");
+  printf("#include <avr/pgmspace.h>\n");
+  printf("#elif defined(ESP8266)\n");
+  printf("#include <pgmspace.h>\n");
+  printf("#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)\n");
+  printf("// PROGMEM is defefind for T4 to place data in specific memory section\n");
+  printf("#undef PROGMEM\n");
+  printf("#define PROGMEM\n");
+  printf("#else\n");
+  printf("#define PROGMEM\n");
+  printf("#endif\n\n");
+
   // Currently all symbols from 'first' to 'last' are processed.
   // Fonts may contain WAY more glyphs than that, but this code
   // will need to handle encoding stuff to deal with extracting
@@ -236,9 +251,11 @@ int main(int argc, char *argv[]) {
     printf("  0x%02X, 0x%02X, %ld };\n\n", first, last,
            face->size->metrics.height >> 6);
   }
-  printf("// Approx. %d bytes\n", bitmapOffset + (last - first + 1) * 7 + 7);
+  printf("// Approx. %d bytes\n\n", bitmapOffset + (last - first + 1) * 7 + 7);
   // Size estimate is based on AVR struct and pointer sizes;
   // actual size may vary.
+
+  printf("#endif // %s_H\n", fontName);
 
   FT_Done_FreeType(library);
 
