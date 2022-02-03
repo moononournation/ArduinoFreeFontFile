@@ -146,6 +146,8 @@ int main(int argc, char *argv[]) {
   printf("#include <avr/pgmspace.h>\n");
   printf("#elif defined(ESP8266)\n");
   printf("#include <pgmspace.h>\n");
+  printf("#undef PROGMEM\n");
+  printf("#define PROGMEM STORE_ATTR\n");
   printf("#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)\n");
   printf("// PROGMEM is defefind for T4 to place data in specific memory section\n");
   printf("#undef PROGMEM\n");

@@ -1,3 +1,19 @@
+#ifndef FreeSerif8pt7b_H
+#define FreeSerif8pt7b_H
+
+#ifdef __AVR__
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#elif defined(ESP8266)
+#include <pgmspace.h>
+#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)
+// PROGMEM is defefind for T4 to place data in specific memory section
+#undef PROGMEM
+#define PROGMEM
+#else
+#define PROGMEM
+#endif
+
 const uint8_t FreeSerif8pt7bBitmaps[] PROGMEM = {
   0x3C, 0x66, 0x42, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0x42, 0x66, 0x3C, 0x03,
   0x8C, 0x63, 0x18, 0xC6, 0x31, 0x8C, 0xF0, 0x3C, 0x4E, 0x86, 0x06, 0x06,
@@ -28,3 +44,5 @@ const GFXfont FreeSerif8pt7b PROGMEM = {
   0x30, 0x3A, 19 };
 
 // Approx. 188 bytes
+
+#endif // FreeSerif8pt7b_H

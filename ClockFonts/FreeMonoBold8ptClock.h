@@ -1,3 +1,19 @@
+#ifndef FreeMonoBold8pt7b_H
+#define FreeMonoBold8pt7b_H
+
+#ifdef __AVR__
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#elif defined(ESP8266)
+#include <pgmspace.h>
+#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)
+// PROGMEM is defefind for T4 to place data in specific memory section
+#undef PROGMEM
+#define PROGMEM
+#else
+#define PROGMEM
+#endif
+
 const uint8_t FreeMonoBold8pt7bBitmaps[] PROGMEM = {
   0x3C, 0x7E, 0xE7, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0xE7, 0x7E, 0x3C, 0x38,
   0xF1, 0x60, 0xC1, 0x83, 0x06, 0x0C, 0x7E, 0xFC, 0x79, 0xFB, 0x18, 0x30,
@@ -28,3 +44,5 @@ const GFXfont FreeMonoBold8pt7b PROGMEM = {
   0x30, 0x3A, 16 };
 
 // Approx. 183 bytes
+
+#endif // FreeMonoBold8pt7b_H

@@ -1,3 +1,19 @@
+#ifndef FreeSans9pt7b_H
+#define FreeSans9pt7b_H
+
+#ifdef __AVR__
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#elif defined(ESP8266)
+#include <pgmspace.h>
+#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)
+// PROGMEM is defefind for T4 to place data in specific memory section
+#undef PROGMEM
+#define PROGMEM
+#else
+#define PROGMEM
+#endif
+
 const uint8_t FreeSans9pt7bBitmaps[] PROGMEM = {
   0x3C, 0x66, 0x42, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0x42, 0x66,
   0x3C, 0x11, 0x3F, 0x33, 0x33, 0x33, 0x33, 0x30, 0x3E, 0x31, 0xB0, 0x78,
@@ -31,3 +47,5 @@ const GFXfont FreeSans9pt7b PROGMEM = {
   0x30, 0x3A, 21 };
 
 // Approx. 218 bytes
+
+#endif // FreeSans9pt7b_H

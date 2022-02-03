@@ -1,3 +1,19 @@
+#ifndef FreeSansBoldOblique9pt7b_H
+#define FreeSansBoldOblique9pt7b_H
+
+#ifdef __AVR__
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#elif defined(ESP8266)
+#include <pgmspace.h>
+#elif defined(__IMXRT1052__) || defined(__IMXRT1062__)
+// PROGMEM is defefind for T4 to place data in specific memory section
+#undef PROGMEM
+#define PROGMEM
+#else
+#define PROGMEM
+#endif
+
 const uint8_t FreeSansBoldOblique9pt7bBitmaps[] PROGMEM = {
   0x0F, 0x07, 0xE3, 0x9D, 0xC7, 0x71, 0xDC, 0x7E, 0x1F, 0x8E, 0xE3, 0xB8,
   0xEE, 0x73, 0xF8, 0x3C, 0x00, 0x04, 0x3B, 0xF7, 0xE1, 0xC3, 0x06, 0x1C,
@@ -34,3 +50,5 @@ const GFXfont FreeSansBoldOblique9pt7b PROGMEM = {
   0x30, 0x3A, 21 };
 
 // Approx. 257 bytes
+
+#endif // FreeSansBoldOblique9pt7b_H
